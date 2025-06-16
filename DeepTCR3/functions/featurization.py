@@ -1,9 +1,36 @@
-AA_MAP = {aa: i for i, aa in enumerate("ACDEFGHIKLMNPQRSTVWY", start=1)}  # 1-indexed
-GENE_MAP = {'TRBV6-1': 1, 'TRBV7-3': 2, 'TRBV5-4': 3, 'TRBJ2-1': 1, 'TRBJ2-7': 2, 'TRBJ1-2': 3}
+# functions/featurization.py
 
-def featurize_sequences(seq_list):
-    max_len = 20
-    return [[AA_MAP.get(aa, 0) for aa in seq.ljust(max_len, 'X')[:max_len]] for seq in seq_list]
+# Matching DeepTCR-style featurization
+
+import numpy as np
+import torch
+
+# Amino acid vocab (DeepTCR-style)
+AA_LIST = ['A', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'M',
+           'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'Y']
+AA_TO_INDEX = {aa: i+1 for i, aa in enumerate(AA_LIST)}  # 0 is padding
+
+# Gene vocab dictionaries (examples)
+GENE_VOCAB = {}
+GENE_OFFSET = 1  # 0 is padding
+
+
+def featurize_sequences(seq_list, max_length=40):
+    encoded = []
+    for seq in seq_list:
+        seq_encoded = [AA_TO_INDEX.get(aa, 0) for aa in seq[:max_length]]
+        # Right pad with 0s
+        if len(seq_encoded) < max_length:
+            seq_encoded += [0] * (max_length - len(seq_encoded))
+        encoded.append(seq_encoded)
+    return encoded
+
 
 def featurize_genes(genes):
-    return [GENE_MAP.get(g, 0) for g in genes]
+    global GENE_VOCAB
+    encoded = []
+    for g in genes:
+        if g not in GENE_VOCAB:
+            GENE_VOCAB[g] = len(GENE_VOCAB) + GENE_OFFSET
+        encoded.append(GENE_VOCAB[g])
+    return encoded
