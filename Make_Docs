@@ -1,3 +1,0 @@
-#!/bin/bash
-python3 -m pydoc DeepTCR3/DeepTCR3.py > Documentation.txt
-

@@ -1,0 +1,4 @@
+sequence,v_gene,j_gene,label,weight,sample_id
+CASSLGQGAEAFF,TRBV6-1,TRBJ2-1,1,1.0,rep1
+CASSIRSSYEQYF,TRBV7-3,TRBJ2-7,0,1.0,rep1
+CASSPPSGGELFF,TRBV5-4,TRBJ1-2,1,0.8,rep2
