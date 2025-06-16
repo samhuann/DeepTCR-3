@@ -1,5 +1,5 @@
 import pandas as pd
-from DeepTCR.DeepTCR import DeepTCR_SS
+from DeepTCR3.DeepTCR3 import DeepTCR3_SS
 import numpy as np
 from multiprocessing import Pool
 import os
@@ -28,7 +28,7 @@ df_epitope_counts['epitope'] = epitopes
 df_epitope_counts['counts'] = mcpas_counts
 df_epitope_counts.sort_values(by='counts',inplace=True,ascending=False)
 
-DTCRS = DeepTCR_SS('reg_bm',device=2)
+DTCRS = DeepTCR3_SS('reg_bm',device=2)
 
 z=0
 antigen = df_epitope_counts['antigen'].iloc[z]

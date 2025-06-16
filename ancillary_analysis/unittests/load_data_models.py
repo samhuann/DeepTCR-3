@@ -1,4 +1,4 @@
-from DeepTCR.DeepTCR import DeepTCR_SS
+from DeepTCR3.DeepTCR3 import DeepTCR3_SS
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -11,7 +11,7 @@ import matplotlib
 matplotlib.rc('font', family='Arial')
 
 #Instantiate training object
-DTCRU = DeepTCR_SS('Murine_Sup')
+DTCRU = DeepTCR3_SS('Murine_Sup')
 #Load Data
 DTCRU.Get_Data(directory='../../Data/Murine_Antigens',Load_Prev_Data=False,
                aa_column_beta=0,count_column=1,v_beta_column=2,j_beta_column=3,

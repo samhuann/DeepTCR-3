@@ -1,5 +1,5 @@
 import pandas as pd
-from DeepTCR.DeepTCR import DeepTCR_SS
+from DeepTCR3.DeepTCR3 import DeepTCR3_SS
 import numpy as np
 from scipy.stats import gaussian_kde
 import matplotlib.pyplot as plt
@@ -10,7 +10,7 @@ import pickle
 df = pd.read_csv('../../../Data/10x_Data/Data_Regression.csv')
 antigen = 'A0201_GLCTLVAML_BMLF1_EBV'
 
-DTCRS = DeepTCR_SS('reg_ebv',device=2)
+DTCRS = DeepTCR3_SS('reg_ebv',device=2)
 #Get alpha/beta sequences
 alpha = np.asarray(df['alpha'].tolist())
 beta = np.asarray(df['beta'].tolist())

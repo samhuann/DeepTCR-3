@@ -3,13 +3,13 @@
 """This script is used to train both the sequence and repertoire classifier on the
 Rudqvist_2017 dataset and compare their performances."""
 
-from DeepTCR.DeepTCR import DeepTCR_SS, DeepTCR_WF
+from DeepTCR3.DeepTCR3 import DeepTCR3_SS, DeepTCR3_WF
 from sklearn.metrics import roc_curve, roc_auc_score
 import numpy as np
 from matplotlib import pyplot as plt
 
 #Train Sequence Classifier
-# DTCR_SS = DeepTCR_SS('Rudqvist_SS')
+# DTCR_SS = DeepTCR3_SS('Rudqvist_SS')
 # DTCR_SS.Get_Data(directory='../../../Data/Rudqvist',Load_Prev_Data=False,
 #                aa_column_beta=1,count_column=2,v_beta_column=7,d_beta_column=14,j_beta_column=21,
 #                  type_of_data_cut='Num_Seq',
@@ -17,7 +17,7 @@ from matplotlib import pyplot as plt
 
 
 # #Train Sequence Classifier
-# DTCR_SS = DeepTCR_SS('help_model')
+# DTCR_SS = DeepTCR3_SS('help_model')
 # DTCR_SS.Get_Data(directory='../../../Data/help',Load_Prev_Data=False,aggregate_by_aa=True,
 #                aa_column_beta=0,count_column=4,v_beta_column=1,j_beta_column=3)
 #
@@ -37,7 +37,7 @@ train_loss_min=1.0
 seeds = np.array(range(folds))
 graph_seed=0
 
-DTCR_WF = DeepTCR_WF('Rudqvist_WF2')
+DTCR_WF = DeepTCR3_WF('Rudqvist_WF2')
 DTCR_WF.Get_Data(directory='../../../Data/Rudqvist',Load_Prev_Data=False,
                aa_column_beta=1,count_column=2,v_beta_column=7,d_beta_column=14,j_beta_column=21,
                  type_of_data_cut='Num_Seq',

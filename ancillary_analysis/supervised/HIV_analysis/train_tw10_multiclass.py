@@ -1,4 +1,4 @@
-from DeepTCR.DeepTCR import DeepTCR_WF, DeepTCR_SS
+from DeepTCR3.DeepTCR3 import DeepTCR3_WF, DeepTCR3_SS
 import glob
 import os
 import numpy as np
@@ -43,7 +43,7 @@ label_train = np.hstack(label_train)
 count_train = np.hstack(count_train)
 
 #Train Sequence Classifier
-DTCR = DeepTCR_SS('tw10_seq',device=gpu)
+DTCR = DeepTCR3_SS('tw10_seq',device=gpu)
 DTCR.Load_Data(beta_sequences=seq_train,class_labels=label_train)
 DTCR.Monte_Carlo_CrossVal(folds=folds,graph_seed=graph_seed,seeds=seeds,convergence='training')
 y_pred = DTCR.predicted

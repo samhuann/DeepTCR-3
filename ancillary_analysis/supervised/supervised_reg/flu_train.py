@@ -1,12 +1,12 @@
 import pandas as pd
-from DeepTCR.DeepTCR import DeepTCR_SS
+from DeepTCR3.DeepTCR3 import DeepTCR3_SS
 import numpy as np
 import pickle
 
 df = pd.read_csv('../../../Data/10x_Data/Data_Regression.csv')
 antigen = 'A0201_GILGFVFTL_Flu-MP_Influenza'
 
-DTCRS = DeepTCR_SS('reg_flu',device=2)
+DTCRS = DeepTCR3_SS('reg_flu',device=2)
 #Get alpha/beta sequences
 alpha = np.asarray(df['alpha'].tolist())
 beta = np.asarray(df['beta'].tolist())

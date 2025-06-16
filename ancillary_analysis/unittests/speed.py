@@ -3,7 +3,7 @@ import pandas as pd
 import glob
 import os
 import time
-from DeepTCR.functions.data_processing import Get_DF_Data
+from DeepTCR3.functions.data_processing import Get_DF_Data
 import pickle
 import tracemalloc
 

@@ -6,7 +6,7 @@ Supplementary Figures 8-11
 """This script is used to characterize the performance of various featurization
 methods on TCRSeq data from 7 Human Antigens."""
 
-from DeepTCR.DeepTCR import DeepTCR_U
+from DeepTCR3.DeepTCR3 import DeepTCR3_U
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.spatial.distance import pdist, squareform
@@ -17,7 +17,7 @@ import os
 import pandas as pd
 
 #Instantiate training object
-DTCRU = DeepTCR_U('Human_U')
+DTCRU = DeepTCR3_U('Human_U')
 #Load Data
 DTCRU.Get_Data(directory='../../Data/Human_Antigens',Load_Prev_Data=False,aggregate_by_aa=True,
                aa_column_beta=0,count_column=1,v_beta_column=2,j_beta_column=3)

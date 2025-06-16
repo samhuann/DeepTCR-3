@@ -5,7 +5,7 @@ regressed against the quantitative evaluation of antigen-specificity via
 dCODE Dextramer reagents"""
 
 import pandas as pd
-from DeepTCR.DeepTCR import DeepTCR_SS
+from DeepTCR3.DeepTCR3 import DeepTCR3_SS
 import numpy as np
 from multiprocessing import Pool
 import os
@@ -18,7 +18,7 @@ from Bio.Seq import Seq
 from Bio.Alphabet import IUPAC
 
 df = pd.read_csv('../../Data/10x_Data/Data_Regression.csv')
-DTCRS = DeepTCR_SS('reg',device=2)
+DTCRS = DeepTCR3_SS('reg',device=2)
 p = Pool(40)
 
 #Get alpha/beta sequences

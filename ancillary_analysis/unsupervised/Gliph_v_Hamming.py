@@ -13,12 +13,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
-from DeepTCR.DeepTCR import DeepTCR_U
+from DeepTCR3.DeepTCR3 import DeepTCR3_U
 from scipy.spatial.distance import pdist
 from scipy.cluster.hierarchy import linkage,fcluster
 
 #Instantiate training object
-DTCRU = DeepTCR_U('Glanville_v_Hamming')
+DTCRU = DeepTCR3_U('Glanville_v_Hamming')
 DTCRU.Get_Data(directory='../../Data/Glanville/',Load_Prev_Data=False,aa_column_beta=1,aggregate_by_aa=False)
 
 method_dim = 'Hamming'

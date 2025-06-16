@@ -1,10 +1,10 @@
 """This script is used to train the TCR-only model on the CheckMate-038 Clinical Trial Data."""
 
-from DeepTCR.DeepTCR import DeepTCR_WF
+from DeepTCR3.DeepTCR3 import DeepTCR3_WF
 import numpy as np
 
 
-DTCR = DeepTCR_WF('Human_TIL',device='/device:GPU:1')
+DTCR = DeepTCR3_WF('Human_TIL',device='/device:GPU:1')
 dir = 'Topalian/beta/pre_crpr_sdpd'
 DTCR.Get_Data(directory='../../Data/CheckMate_038',Load_Prev_Data=False,
                aa_column_beta=1,count_column=2,v_beta_column=7,d_beta_column=14,j_beta_column=21,data_cut=1.0,

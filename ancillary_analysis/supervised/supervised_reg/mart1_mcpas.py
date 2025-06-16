@@ -1,5 +1,5 @@
 import pandas as pd
-from DeepTCR.DeepTCR import DeepTCR_SS
+from DeepTCR3.DeepTCR3 import DeepTCR3_SS
 import numpy as np
 
 epitope = 'ELAGIGILTV'
@@ -8,7 +8,7 @@ cdr3_alpha_col = 'CDR3.alpha.aa'
 epitope_col = 'Epitope.peptide'
 
 df = pd.read_csv('../../../Data/10x_Data/Data_Regression.csv')
-DTCRS = DeepTCR_SS('reg_mart1',device=2)
+DTCRS = DeepTCR3_SS('reg_mart1',device=2)
 
 #Check performance no sequences in MCPAS
 df_train_pep = pd.DataFrame()

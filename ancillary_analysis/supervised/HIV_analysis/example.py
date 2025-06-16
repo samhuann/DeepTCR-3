@@ -1,4 +1,4 @@
-from DeepTCR.DeepTCR import DeepTCR_WF
+from DeepTCR3.DeepTCR3 import DeepTCR3_WF
 import glob
 import os
 import numpy as np
@@ -30,7 +30,7 @@ for file in files:
 
 label_dict = dict(zip(samples,labels))
 
-DTCR = DeepTCR_WF('load')
+DTCR = DeepTCR3_WF('load')
 DTCR.Get_Data('../../../Data/HIV',aa_column_beta=1,count_column=2,v_beta_column=7,d_beta_column=14,j_beta_column=21,
               type_of_data_cut='Read_Cut',data_cut=10)
 
@@ -49,7 +49,7 @@ idx = np.isin(class_labels, label_keep)
 class_dict = {test_peptide: 'Cognate', 'CEF': 'non-Cognate', 'NoPeptide': 'non-Cognate', 'AY9': 'non-Cognate'}
 class_relabel = class_labels[idx]
 class_relabel = np.array([class_dict[x] for x in class_relabel])
-DTCR = DeepTCR_WF('screen', device=gpu)
+DTCR = DeepTCR3_WF('screen', device=gpu)
 DTCR.Load_Data(beta_sequences=beta_sequences[idx],
                counts=counts[idx],
                class_labels=class_relabel,

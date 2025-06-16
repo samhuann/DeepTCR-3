@@ -1,4 +1,4 @@
-site_name: DeepTCR
+site_name: DeepTCR3
 nav:
     - Home: index.md
     - API reference: api.md

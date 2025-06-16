@@ -6,7 +6,7 @@ Fig 2C
 and generate the top representative sequences for each class and derive the 
 motifs that were learned by the network."""
 
-from DeepTCR.DeepTCR import DeepTCR_SS
+from DeepTCR3.DeepTCR3 import DeepTCR3_SS
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from Bio.Seq import Seq
@@ -16,7 +16,7 @@ import os
 import shutil
 
 #Run Supervised Sequence Classifier
-DTCRS = DeepTCR_SS('Sequence_C',device=6)
+DTCRS = DeepTCR3_SS('Sequence_C',device=6)
 DTCRS.Get_Data(directory='../../Data/Murine_Antigens',Load_Prev_Data=True,aggregate_by_aa=True,
                aa_column_beta=0,count_column=1,v_beta_column=2,j_beta_column=3)
 

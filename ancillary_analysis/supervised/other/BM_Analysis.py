@@ -3,7 +3,7 @@ Supplementary Fig. 22
 """
 
 """This script is used to benchmark various state-of-the-art biomarkers of response to immunotherapy
-agasint DeepTCR."""
+agasint DeepTCR3."""
 
 import numpy as np
 import pandas as pd
@@ -58,7 +58,7 @@ auc_fn = lambda samp, idx: (lambda roc: [auc(roc[0], roc[1]), roc])(roc_curve(sa
 # lr = LogisticRegression(solver='lbfgs', max_iter=1000)
 
 mods = dict()
-for mod_name, col in zip(['PD-L1 (TPS)', 'TMB', 'TCR Clonality', 'TTC', 'DeepTCR'], ['PDL1', 'log2_TMB', 'Clonality', 'log2_TTC', 'DeepTCR']):
+for mod_name, col in zip(['PD-L1 (TPS)', 'TMB', 'TCR Clonality', 'TTC', 'DeepTCR3'], ['PDL1', 'log2_TMB', 'Clonality', 'log2_TTC', 'DeepTCR3']):
     mods[mod_name] = dict()
     mods[mod_name]['cols'] = ['Response_Num', col]
     sample_idx = ~d[mods[mod_name]['cols']].isna().any(axis=1)
@@ -83,9 +83,9 @@ ax[0, 0].legend(['%s (%.3f)' % (key, mods[key]['med_aucs']) for key in mods.keys
 ax[0, 0].set(xlabel='FPR', ylabel='TPR', title='Model AUCs')
 
 ax[1, 0].cla()
-sns.scatterplot(d['log2_TTC'].values, d['DeepTCR'].values, hue=d['Response'], edgecolor=None, ax=ax[1, 0])
-ax[1, 0].set(xlabel='log2 TCR Read counts', ylabel='DeepTCR Likelihood of Response', title='DeepTCR vs. TTC')
-spearmanr(d['TCR_Reads'].values, d['DeepTCR'].values)
+sns.scatterplot(d['log2_TTC'].values, d['DeepTCR3'].values, hue=d['Response'], edgecolor=None, ax=ax[1, 0])
+ax[1, 0].set(xlabel='log2 TCR Read counts', ylabel='DeepTCR3 Likelihood of Response', title='DeepTCR3 vs. TTC')
+spearmanr(d['TCR_Reads'].values, d['DeepTCR3'].values)
 
 lr = LogisticRegression(solver='lbfgs', max_iter=1000)
 
@@ -93,11 +93,11 @@ coef = list()
 # mc_pred = list()
 # for idx_train, idx_test in StratifiedShuffleSplit(500, 10).split(np.zeros(d.shape[0]), d['Response_Num'].values):
 for idx_train in np.random.choice(d.shape[0], [500, d.shape[0]], replace=True):
-    # lr.fit(np.concatenate([d.loc[idx_train, ['DeepTCR', 'log2_TTC']].values, np.prod(d.loc[idx_train, ['DeepTCR', 'log2_TTC']].values, axis=1)[:, np.newaxis]], axis=1), d.loc[idx_train, 'Response_Num'].values)
-    # lr.fit(d.loc[idx_train, ['DeepTCR', 'TCR_Reads']].values, d.loc[idx_train, 'Response_Num'].values)
-    lr.fit(d.loc[idx_train, ['DeepTCR', 'log2_TTC']].values, d.loc[idx_train, 'Response_Num'].values)
+    # lr.fit(np.concatenate([d.loc[idx_train, ['DeepTCR3', 'log2_TTC']].values, np.prod(d.loc[idx_train, ['DeepTCR3', 'log2_TTC']].values, axis=1)[:, np.newaxis]], axis=1), d.loc[idx_train, 'Response_Num'].values)
+    # lr.fit(d.loc[idx_train, ['DeepTCR3', 'TCR_Reads']].values, d.loc[idx_train, 'Response_Num'].values)
+    lr.fit(d.loc[idx_train, ['DeepTCR3', 'log2_TTC']].values, d.loc[idx_train, 'Response_Num'].values)
     coef.append(lr.coef_[0])
-    # mc_pred.append(np.stack([lr.predict_proba(d.loc[idx_test, ['DeepTCR', 'log2_TTC']].values)[:, 1], d.loc[idx_test, 'Response_Num'].values], axis=1))
+    # mc_pred.append(np.stack([lr.predict_proba(d.loc[idx_test, ['DeepTCR3', 'log2_TTC']].values)[:, 1], d.loc[idx_test, 'Response_Num'].values], axis=1))
 # mc_pred = np.concatenate(mc_pred, axis=0)
 coef = np.stack(coef, axis=0)
 
@@ -105,7 +105,7 @@ coef = np.stack(coef, axis=0)
 # auc(fpr, tpr)
 
 sns.violinplot(data=coef, ax=ax[1, 1])
-ax[1, 1].set(ylabel='Logistic regression coefficient', xticklabels=['DeepTCR', 'TTC'], ylim=[0, ax[1, 1].get_ylim()[1]], title='Multivariate Logistic Regression Coefficients')
+ax[1, 1].set(ylabel='Logistic regression coefficient', xticklabels=['DeepTCR3', 'TTC'], ylim=[0, ax[1, 1].get_ylim()[1]], title='Multivariate Logistic Regression Coefficients')
 plt.subplots_adjust(top = 0.95, bottom=0.1, hspace=0.25,wspace=0.35)
 plt.show()
 np.quantile(coef, [0.025, 0.5, 0.975], axis=0)

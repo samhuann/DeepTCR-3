@@ -1,16 +1,16 @@
-Help on module DeepTCR:
+Help on module DeepTCR3:
 
 NAME
-    DeepTCR
+    DeepTCR3
 
 DESCRIPTION
     # import sys
     # sys.path.append('../')
-    # from DeepTCR.functions.Layers import *
-    # from DeepTCR.functions.utils_u import *
-    # from DeepTCR.functions.utils_s import *
-    # from DeepTCR.functions.act_fun import *
-    # from DeepTCR.functions.plot_func import *
+    # from DeepTCR3.functions.Layers import *
+    # from DeepTCR3.functions.utils_u import *
+    # from DeepTCR3.functions.utils_s import *
+    # from DeepTCR3.functions.act_fun import *
+    # from DeepTCR3.functions.plot_func import *
     # import seaborn as sns
     # import colorsys
     # from scipy.cluster.hierarchy import linkage,fcluster,dendrogram, leaves_list
@@ -19,7 +19,7 @@ DESCRIPTION
     # import umap
     # from sklearn.cluster import DBSCAN,KMeans
     # import sklearn
-    # import DeepTCR.phenograph as phenograph
+    # import DeepTCR3.phenograph as phenograph
     # from scipy.spatial import distance
     # import glob
     # from sklearn.preprocessing import LabelEncoder, OneHotEncoder, MultiLabelBinarizer
@@ -33,21 +33,21 @@ DESCRIPTION
 
 CLASSES
     builtins.object
-        DeepTCR_base
-            DeepTCR_S_base(DeepTCR_base, feature_analytics_class, vis_class)
-                DeepTCR_SS
-                DeepTCR_WF
-            DeepTCR_U(DeepTCR_base, feature_analytics_class, vis_class)
+        DeepTCR3_base
+            DeepTCR3_S_base(DeepTCR3_base, feature_analytics_class, vis_class)
+                DeepTCR3_SS
+                DeepTCR3_WF
+            DeepTCR3_U(DeepTCR3_base, feature_analytics_class, vis_class)
         feature_analytics_class
         vis_class
     
-    class DeepTCR_SS(DeepTCR_S_base)
-     |  DeepTCR_SS(Name, max_length=40, device=0)
+    class DeepTCR3_SS(DeepTCR3_S_base)
+     |  DeepTCR3_SS(Name, max_length=40, device=0)
      |  
      |  Method resolution order:
-     |      DeepTCR_SS
-     |      DeepTCR_S_base
-     |      DeepTCR_base
+     |      DeepTCR3_SS
+     |      DeepTCR3_S_base
+     |      DeepTCR3_base
      |      feature_analytics_class
      |      vis_class
      |      builtins.object
@@ -546,7 +546,7 @@ CLASSES
      |      ---------------------------------------
      |  
      |  ----------------------------------------------------------------------
-     |  Methods inherited from DeepTCR_S_base:
+     |  Methods inherited from DeepTCR3_S_base:
      |  
      |  AUC_Curve(self, by=None, filename='AUC.tif', title=None, title_font=None, plot=True, diag_line=True, xtick_size=None, ytick_size=None, xlabel_size=None, ylabel_size=None, legend_font_size=None, frameon=True, legend_loc='lower right', figsize=None)
      |      AUC Curve for both Sequence and Repertoire/Sample Classifiers
@@ -713,7 +713,7 @@ CLASSES
      |          A 1d array with the j-alpha genes for inference.
      |      
      |      hla: ndarray of tuples/arrays
-     |          To input the hla context for each sequence fed into DeepTCR, this will need to formatted
+     |          To input the hla context for each sequence fed into DeepTCR3, this will need to formatted
      |          as an ndarray that is (N,) for each sequence where each entry is a tuple/array of strings referring
      |          to the alleles seen for that sequence.
      |              ('A*01:01', 'A*11:01', 'B*35:01', 'B*35:02', 'C*04:01')
@@ -809,10 +809,10 @@ CLASSES
      |          axis on which plot is drawn
      |  
      |  ----------------------------------------------------------------------
-     |  Methods inherited from DeepTCR_base:
+     |  Methods inherited from DeepTCR3_base:
      |  
      |  Get_Data(self, directory, Load_Prev_Data=False, classes=None, type_of_data_cut='Fraction_Response', data_cut=1.0, n_jobs=40, aa_column_alpha=None, aa_column_beta=None, count_column=None, sep='\t', aggregate_by_aa=True, v_alpha_column=None, j_alpha_column=None, v_beta_column=None, j_beta_column=None, d_beta_column=None, p=None, hla=None, use_hla_supertype=False, keep_non_supertype_alleles=False)
-     |      Get Data for DeepTCR
+     |      Get Data for DeepTCR3
      |      
      |      Parse Data into appropriate inputs for neural network from directories where data is stored.
      |      
@@ -821,7 +821,7 @@ CLASSES
      |      directory: str
      |          Path to directory with folders with tsv files are present
      |          for analysis. Folders names become labels for files within them. If the directory contains
-     |          the TCRSeq files not organized into classes/labels, DeepTCR will load all files within that directory.
+     |          the TCRSeq files not organized into classes/labels, DeepTCR3 will load all files within that directory.
      |      
      |      Load_Prev_Data: bool
      |          Loads Previous Data.
@@ -944,9 +944,9 @@ CLASSES
      |      ---------------------------------------
      |  
      |  Load_Data(self, alpha_sequences=None, beta_sequences=None, v_beta=None, d_beta=None, j_beta=None, v_alpha=None, j_alpha=None, class_labels=None, sample_labels=None, freq=None, counts=None, Y=None, p=None, hla=None, use_hla_supertype=False, keep_non_supertype_alleles=False, w=None)
-     |      Load Data programatically into DeepTCR.
+     |      Load Data programatically into DeepTCR3.
      |      
-     |      DeepTCR allows direct user input of sequence data for DeepTCR analysis. By using this method,
+     |      DeepTCR3 allows direct user input of sequence data for DeepTCR3 analysis. By using this method,
      |      a user can load numpy arrays with relevant TCRSeq data for analysis.
      |      
      |      Inputs
@@ -993,7 +993,7 @@ CLASSES
      |          repeat that same value for all the instances/sequences of the sample.
      |      
      |      hla: ndarray of tuples/arrays
-     |          To input the hla context for each sequence fed into DeepTCR, this will need to formatted
+     |          To input the hla context for each sequence fed into DeepTCR3, this will need to formatted
      |          as an ndarray that is (N,) for each sequence where each entry is a tuple or array of strings referring
      |          to the alleles seen for that sequence.
      |              ('A*01:01', 'A*11:01', 'B*35:01', 'B*35:02', 'C*04:01')
@@ -1086,7 +1086,7 @@ CLASSES
      |          A 1d array with the j-alpha genes for inference.
      |      
      |      hla: ndarray of tuples/arrays
-     |          To input the hla context for each sequence fed into DeepTCR, this will need to formatted
+     |          To input the hla context for each sequence fed into DeepTCR3, this will need to formatted
      |          as an ndarray that is (N,) for each sequence where each entry is a tuple/array of strings referring
      |          to the alleles seen for that sequence.
      |              ('A*01:01', 'A*11:01', 'B*35:01', 'B*35:02', 'C*04:01')
@@ -1155,7 +1155,7 @@ CLASSES
      |      ---------------------------------------
      |  
      |  ----------------------------------------------------------------------
-     |  Data descriptors inherited from DeepTCR_base:
+     |  Data descriptors inherited from DeepTCR3_base:
      |  
      |  __dict__
      |      dictionary for instance variables (if defined)
@@ -1214,7 +1214,7 @@ CLASSES
      |      order_by_linkage: bool
      |          To list sequences in the cluster dataframes by how they are related via ward's linakge,
      |          set this value to True. Otherwise, each cluster dataframe will list the sequences by the order they
-     |          were loaded into DeepTCR.
+     |          were loaded into DeepTCR3.
      |      
      |      Returns
      |      
@@ -1556,12 +1556,12 @@ CLASSES
      |      
      |      ---------------------------------------
     
-    class DeepTCR_S_base(DeepTCR_base, feature_analytics_class, vis_class)
-     |  DeepTCR_S_base(Name, max_length=40, device=0)
+    class DeepTCR3_S_base(DeepTCR3_base, feature_analytics_class, vis_class)
+     |  DeepTCR3_S_base(Name, max_length=40, device=0)
      |  
      |  Method resolution order:
-     |      DeepTCR_S_base
-     |      DeepTCR_base
+     |      DeepTCR3_S_base
+     |      DeepTCR3_base
      |      feature_analytics_class
      |      vis_class
      |      builtins.object
@@ -1733,7 +1733,7 @@ CLASSES
      |          A 1d array with the j-alpha genes for inference.
      |      
      |      hla: ndarray of tuples/arrays
-     |          To input the hla context for each sequence fed into DeepTCR, this will need to formatted
+     |          To input the hla context for each sequence fed into DeepTCR3, this will need to formatted
      |          as an ndarray that is (N,) for each sequence where each entry is a tuple/array of strings referring
      |          to the alleles seen for that sequence.
      |              ('A*01:01', 'A*11:01', 'B*35:01', 'B*35:02', 'C*04:01')
@@ -1829,10 +1829,10 @@ CLASSES
      |          axis on which plot is drawn
      |  
      |  ----------------------------------------------------------------------
-     |  Methods inherited from DeepTCR_base:
+     |  Methods inherited from DeepTCR3_base:
      |  
      |  Get_Data(self, directory, Load_Prev_Data=False, classes=None, type_of_data_cut='Fraction_Response', data_cut=1.0, n_jobs=40, aa_column_alpha=None, aa_column_beta=None, count_column=None, sep='\t', aggregate_by_aa=True, v_alpha_column=None, j_alpha_column=None, v_beta_column=None, j_beta_column=None, d_beta_column=None, p=None, hla=None, use_hla_supertype=False, keep_non_supertype_alleles=False)
-     |      Get Data for DeepTCR
+     |      Get Data for DeepTCR3
      |      
      |      Parse Data into appropriate inputs for neural network from directories where data is stored.
      |      
@@ -1841,7 +1841,7 @@ CLASSES
      |      directory: str
      |          Path to directory with folders with tsv files are present
      |          for analysis. Folders names become labels for files within them. If the directory contains
-     |          the TCRSeq files not organized into classes/labels, DeepTCR will load all files within that directory.
+     |          the TCRSeq files not organized into classes/labels, DeepTCR3 will load all files within that directory.
      |      
      |      Load_Prev_Data: bool
      |          Loads Previous Data.
@@ -1964,9 +1964,9 @@ CLASSES
      |      ---------------------------------------
      |  
      |  Load_Data(self, alpha_sequences=None, beta_sequences=None, v_beta=None, d_beta=None, j_beta=None, v_alpha=None, j_alpha=None, class_labels=None, sample_labels=None, freq=None, counts=None, Y=None, p=None, hla=None, use_hla_supertype=False, keep_non_supertype_alleles=False, w=None)
-     |      Load Data programatically into DeepTCR.
+     |      Load Data programatically into DeepTCR3.
      |      
-     |      DeepTCR allows direct user input of sequence data for DeepTCR analysis. By using this method,
+     |      DeepTCR3 allows direct user input of sequence data for DeepTCR3 analysis. By using this method,
      |      a user can load numpy arrays with relevant TCRSeq data for analysis.
      |      
      |      Inputs
@@ -2013,7 +2013,7 @@ CLASSES
      |          repeat that same value for all the instances/sequences of the sample.
      |      
      |      hla: ndarray of tuples/arrays
-     |          To input the hla context for each sequence fed into DeepTCR, this will need to formatted
+     |          To input the hla context for each sequence fed into DeepTCR3, this will need to formatted
      |          as an ndarray that is (N,) for each sequence where each entry is a tuple or array of strings referring
      |          to the alleles seen for that sequence.
      |              ('A*01:01', 'A*11:01', 'B*35:01', 'B*35:02', 'C*04:01')
@@ -2106,7 +2106,7 @@ CLASSES
      |          A 1d array with the j-alpha genes for inference.
      |      
      |      hla: ndarray of tuples/arrays
-     |          To input the hla context for each sequence fed into DeepTCR, this will need to formatted
+     |          To input the hla context for each sequence fed into DeepTCR3, this will need to formatted
      |          as an ndarray that is (N,) for each sequence where each entry is a tuple/array of strings referring
      |          to the alleles seen for that sequence.
      |              ('A*01:01', 'A*11:01', 'B*35:01', 'B*35:02', 'C*04:01')
@@ -2175,7 +2175,7 @@ CLASSES
      |      ---------------------------------------
      |  
      |  ----------------------------------------------------------------------
-     |  Data descriptors inherited from DeepTCR_base:
+     |  Data descriptors inherited from DeepTCR3_base:
      |  
      |  __dict__
      |      dictionary for instance variables (if defined)
@@ -2234,7 +2234,7 @@ CLASSES
      |      order_by_linkage: bool
      |          To list sequences in the cluster dataframes by how they are related via ward's linakge,
      |          set this value to True. Otherwise, each cluster dataframe will list the sequences by the order they
-     |          were loaded into DeepTCR.
+     |          were loaded into DeepTCR3.
      |      
      |      Returns
      |      
@@ -2576,12 +2576,12 @@ CLASSES
      |      
      |      ---------------------------------------
     
-    class DeepTCR_U(DeepTCR_base, feature_analytics_class, vis_class)
-     |  DeepTCR_U(Name, max_length=40, device=0)
+    class DeepTCR3_U(DeepTCR3_base, feature_analytics_class, vis_class)
+     |  DeepTCR3_U(Name, max_length=40, device=0)
      |  
      |  Method resolution order:
-     |      DeepTCR_U
-     |      DeepTCR_base
+     |      DeepTCR3_U
+     |      DeepTCR3_base
      |      feature_analytics_class
      |      vis_class
      |      builtins.object
@@ -2805,10 +2805,10 @@ CLASSES
      |      ---------------------------------------
      |  
      |  ----------------------------------------------------------------------
-     |  Methods inherited from DeepTCR_base:
+     |  Methods inherited from DeepTCR3_base:
      |  
      |  Get_Data(self, directory, Load_Prev_Data=False, classes=None, type_of_data_cut='Fraction_Response', data_cut=1.0, n_jobs=40, aa_column_alpha=None, aa_column_beta=None, count_column=None, sep='\t', aggregate_by_aa=True, v_alpha_column=None, j_alpha_column=None, v_beta_column=None, j_beta_column=None, d_beta_column=None, p=None, hla=None, use_hla_supertype=False, keep_non_supertype_alleles=False)
-     |      Get Data for DeepTCR
+     |      Get Data for DeepTCR3
      |      
      |      Parse Data into appropriate inputs for neural network from directories where data is stored.
      |      
@@ -2817,7 +2817,7 @@ CLASSES
      |      directory: str
      |          Path to directory with folders with tsv files are present
      |          for analysis. Folders names become labels for files within them. If the directory contains
-     |          the TCRSeq files not organized into classes/labels, DeepTCR will load all files within that directory.
+     |          the TCRSeq files not organized into classes/labels, DeepTCR3 will load all files within that directory.
      |      
      |      Load_Prev_Data: bool
      |          Loads Previous Data.
@@ -2940,9 +2940,9 @@ CLASSES
      |      ---------------------------------------
      |  
      |  Load_Data(self, alpha_sequences=None, beta_sequences=None, v_beta=None, d_beta=None, j_beta=None, v_alpha=None, j_alpha=None, class_labels=None, sample_labels=None, freq=None, counts=None, Y=None, p=None, hla=None, use_hla_supertype=False, keep_non_supertype_alleles=False, w=None)
-     |      Load Data programatically into DeepTCR.
+     |      Load Data programatically into DeepTCR3.
      |      
-     |      DeepTCR allows direct user input of sequence data for DeepTCR analysis. By using this method,
+     |      DeepTCR3 allows direct user input of sequence data for DeepTCR3 analysis. By using this method,
      |      a user can load numpy arrays with relevant TCRSeq data for analysis.
      |      
      |      Inputs
@@ -2989,7 +2989,7 @@ CLASSES
      |          repeat that same value for all the instances/sequences of the sample.
      |      
      |      hla: ndarray of tuples/arrays
-     |          To input the hla context for each sequence fed into DeepTCR, this will need to formatted
+     |          To input the hla context for each sequence fed into DeepTCR3, this will need to formatted
      |          as an ndarray that is (N,) for each sequence where each entry is a tuple or array of strings referring
      |          to the alleles seen for that sequence.
      |              ('A*01:01', 'A*11:01', 'B*35:01', 'B*35:02', 'C*04:01')
@@ -3082,7 +3082,7 @@ CLASSES
      |          A 1d array with the j-alpha genes for inference.
      |      
      |      hla: ndarray of tuples/arrays
-     |          To input the hla context for each sequence fed into DeepTCR, this will need to formatted
+     |          To input the hla context for each sequence fed into DeepTCR3, this will need to formatted
      |          as an ndarray that is (N,) for each sequence where each entry is a tuple/array of strings referring
      |          to the alleles seen for that sequence.
      |              ('A*01:01', 'A*11:01', 'B*35:01', 'B*35:02', 'C*04:01')
@@ -3151,7 +3151,7 @@ CLASSES
      |      ---------------------------------------
      |  
      |  ----------------------------------------------------------------------
-     |  Data descriptors inherited from DeepTCR_base:
+     |  Data descriptors inherited from DeepTCR3_base:
      |  
      |  __dict__
      |      dictionary for instance variables (if defined)
@@ -3210,7 +3210,7 @@ CLASSES
      |      order_by_linkage: bool
      |          To list sequences in the cluster dataframes by how they are related via ward's linakge,
      |          set this value to True. Otherwise, each cluster dataframe will list the sequences by the order they
-     |          were loaded into DeepTCR.
+     |          were loaded into DeepTCR3.
      |      
      |      Returns
      |      
@@ -3552,13 +3552,13 @@ CLASSES
      |      
      |      ---------------------------------------
     
-    class DeepTCR_WF(DeepTCR_S_base)
-     |  DeepTCR_WF(Name, max_length=40, device=0)
+    class DeepTCR3_WF(DeepTCR3_S_base)
+     |  DeepTCR3_WF(Name, max_length=40, device=0)
      |  
      |  Method resolution order:
-     |      DeepTCR_WF
-     |      DeepTCR_S_base
-     |      DeepTCR_base
+     |      DeepTCR3_WF
+     |      DeepTCR3_S_base
+     |      DeepTCR3_base
      |      feature_analytics_class
      |      vis_class
      |      builtins.object
@@ -4082,7 +4082,7 @@ CLASSES
      |          A 1d array with the frequencies for each sequence.
      |      
      |      hla: ndarray of tuples/arrays
-     |          To input the hla context for each sequence fed into DeepTCR, this will need to formatted
+     |          To input the hla context for each sequence fed into DeepTCR3, this will need to formatted
      |          as an ndarray that is (N,) for each sequence where each entry is a tuple or array of strings referring
      |          to the alleles seen for that sequence.
      |              ('A*01:01', 'A*11:01', 'B*35:01', 'B*35:02', 'C*04:01')
@@ -4313,7 +4313,7 @@ CLASSES
      |      ---------------------------------------
      |  
      |  ----------------------------------------------------------------------
-     |  Methods inherited from DeepTCR_S_base:
+     |  Methods inherited from DeepTCR3_S_base:
      |  
      |  AUC_Curve(self, by=None, filename='AUC.tif', title=None, title_font=None, plot=True, diag_line=True, xtick_size=None, ytick_size=None, xlabel_size=None, ylabel_size=None, legend_font_size=None, frameon=True, legend_loc='lower right', figsize=None)
      |      AUC Curve for both Sequence and Repertoire/Sample Classifiers
@@ -4480,7 +4480,7 @@ CLASSES
      |          A 1d array with the j-alpha genes for inference.
      |      
      |      hla: ndarray of tuples/arrays
-     |          To input the hla context for each sequence fed into DeepTCR, this will need to formatted
+     |          To input the hla context for each sequence fed into DeepTCR3, this will need to formatted
      |          as an ndarray that is (N,) for each sequence where each entry is a tuple/array of strings referring
      |          to the alleles seen for that sequence.
      |              ('A*01:01', 'A*11:01', 'B*35:01', 'B*35:02', 'C*04:01')
@@ -4576,10 +4576,10 @@ CLASSES
      |          axis on which plot is drawn
      |  
      |  ----------------------------------------------------------------------
-     |  Methods inherited from DeepTCR_base:
+     |  Methods inherited from DeepTCR3_base:
      |  
      |  Get_Data(self, directory, Load_Prev_Data=False, classes=None, type_of_data_cut='Fraction_Response', data_cut=1.0, n_jobs=40, aa_column_alpha=None, aa_column_beta=None, count_column=None, sep='\t', aggregate_by_aa=True, v_alpha_column=None, j_alpha_column=None, v_beta_column=None, j_beta_column=None, d_beta_column=None, p=None, hla=None, use_hla_supertype=False, keep_non_supertype_alleles=False)
-     |      Get Data for DeepTCR
+     |      Get Data for DeepTCR3
      |      
      |      Parse Data into appropriate inputs for neural network from directories where data is stored.
      |      
@@ -4588,7 +4588,7 @@ CLASSES
      |      directory: str
      |          Path to directory with folders with tsv files are present
      |          for analysis. Folders names become labels for files within them. If the directory contains
-     |          the TCRSeq files not organized into classes/labels, DeepTCR will load all files within that directory.
+     |          the TCRSeq files not organized into classes/labels, DeepTCR3 will load all files within that directory.
      |      
      |      Load_Prev_Data: bool
      |          Loads Previous Data.
@@ -4711,9 +4711,9 @@ CLASSES
      |      ---------------------------------------
      |  
      |  Load_Data(self, alpha_sequences=None, beta_sequences=None, v_beta=None, d_beta=None, j_beta=None, v_alpha=None, j_alpha=None, class_labels=None, sample_labels=None, freq=None, counts=None, Y=None, p=None, hla=None, use_hla_supertype=False, keep_non_supertype_alleles=False, w=None)
-     |      Load Data programatically into DeepTCR.
+     |      Load Data programatically into DeepTCR3.
      |      
-     |      DeepTCR allows direct user input of sequence data for DeepTCR analysis. By using this method,
+     |      DeepTCR3 allows direct user input of sequence data for DeepTCR3 analysis. By using this method,
      |      a user can load numpy arrays with relevant TCRSeq data for analysis.
      |      
      |      Inputs
@@ -4760,7 +4760,7 @@ CLASSES
      |          repeat that same value for all the instances/sequences of the sample.
      |      
      |      hla: ndarray of tuples/arrays
-     |          To input the hla context for each sequence fed into DeepTCR, this will need to formatted
+     |          To input the hla context for each sequence fed into DeepTCR3, this will need to formatted
      |          as an ndarray that is (N,) for each sequence where each entry is a tuple or array of strings referring
      |          to the alleles seen for that sequence.
      |              ('A*01:01', 'A*11:01', 'B*35:01', 'B*35:02', 'C*04:01')
@@ -4853,7 +4853,7 @@ CLASSES
      |          A 1d array with the j-alpha genes for inference.
      |      
      |      hla: ndarray of tuples/arrays
-     |          To input the hla context for each sequence fed into DeepTCR, this will need to formatted
+     |          To input the hla context for each sequence fed into DeepTCR3, this will need to formatted
      |          as an ndarray that is (N,) for each sequence where each entry is a tuple/array of strings referring
      |          to the alleles seen for that sequence.
      |              ('A*01:01', 'A*11:01', 'B*35:01', 'B*35:02', 'C*04:01')
@@ -4922,7 +4922,7 @@ CLASSES
      |      ---------------------------------------
      |  
      |  ----------------------------------------------------------------------
-     |  Data descriptors inherited from DeepTCR_base:
+     |  Data descriptors inherited from DeepTCR3_base:
      |  
      |  __dict__
      |      dictionary for instance variables (if defined)
@@ -4981,7 +4981,7 @@ CLASSES
      |      order_by_linkage: bool
      |          To list sequences in the cluster dataframes by how they are related via ward's linakge,
      |          set this value to True. Otherwise, each cluster dataframe will list the sequences by the order they
-     |          were loaded into DeepTCR.
+     |          were loaded into DeepTCR3.
      |      
      |      Returns
      |      
@@ -5323,13 +5323,13 @@ CLASSES
      |      
      |      ---------------------------------------
     
-    class DeepTCR_base(builtins.object)
-     |  DeepTCR_base(Name, max_length=40, device=0)
+    class DeepTCR3_base(builtins.object)
+     |  DeepTCR3_base(Name, max_length=40, device=0)
      |  
      |  Methods defined here:
      |  
      |  Get_Data(self, directory, Load_Prev_Data=False, classes=None, type_of_data_cut='Fraction_Response', data_cut=1.0, n_jobs=40, aa_column_alpha=None, aa_column_beta=None, count_column=None, sep='\t', aggregate_by_aa=True, v_alpha_column=None, j_alpha_column=None, v_beta_column=None, j_beta_column=None, d_beta_column=None, p=None, hla=None, use_hla_supertype=False, keep_non_supertype_alleles=False)
-     |      Get Data for DeepTCR
+     |      Get Data for DeepTCR3
      |      
      |      Parse Data into appropriate inputs for neural network from directories where data is stored.
      |      
@@ -5338,7 +5338,7 @@ CLASSES
      |      directory: str
      |          Path to directory with folders with tsv files are present
      |          for analysis. Folders names become labels for files within them. If the directory contains
-     |          the TCRSeq files not organized into classes/labels, DeepTCR will load all files within that directory.
+     |          the TCRSeq files not organized into classes/labels, DeepTCR3 will load all files within that directory.
      |      
      |      Load_Prev_Data: bool
      |          Loads Previous Data.
@@ -5461,9 +5461,9 @@ CLASSES
      |      ---------------------------------------
      |  
      |  Load_Data(self, alpha_sequences=None, beta_sequences=None, v_beta=None, d_beta=None, j_beta=None, v_alpha=None, j_alpha=None, class_labels=None, sample_labels=None, freq=None, counts=None, Y=None, p=None, hla=None, use_hla_supertype=False, keep_non_supertype_alleles=False, w=None)
-     |      Load Data programatically into DeepTCR.
+     |      Load Data programatically into DeepTCR3.
      |      
-     |      DeepTCR allows direct user input of sequence data for DeepTCR analysis. By using this method,
+     |      DeepTCR3 allows direct user input of sequence data for DeepTCR3 analysis. By using this method,
      |      a user can load numpy arrays with relevant TCRSeq data for analysis.
      |      
      |      Inputs
@@ -5510,7 +5510,7 @@ CLASSES
      |          repeat that same value for all the instances/sequences of the sample.
      |      
      |      hla: ndarray of tuples/arrays
-     |          To input the hla context for each sequence fed into DeepTCR, this will need to formatted
+     |          To input the hla context for each sequence fed into DeepTCR3, this will need to formatted
      |          as an ndarray that is (N,) for each sequence where each entry is a tuple or array of strings referring
      |          to the alleles seen for that sequence.
      |              ('A*01:01', 'A*11:01', 'B*35:01', 'B*35:02', 'C*04:01')
@@ -5603,7 +5603,7 @@ CLASSES
      |          A 1d array with the j-alpha genes for inference.
      |      
      |      hla: ndarray of tuples/arrays
-     |          To input the hla context for each sequence fed into DeepTCR, this will need to formatted
+     |          To input the hla context for each sequence fed into DeepTCR3, this will need to formatted
      |          as an ndarray that is (N,) for each sequence where each entry is a tuple/array of strings referring
      |          to the alleles seen for that sequence.
      |              ('A*01:01', 'A*11:01', 'B*35:01', 'B*35:02', 'C*04:01')
@@ -5731,7 +5731,7 @@ CLASSES
      |      order_by_linkage: bool
      |          To list sequences in the cluster dataframes by how they are related via ward's linakge,
      |          set this value to True. Otherwise, each cluster dataframe will list the sequences by the order they
-     |          were loaded into DeepTCR.
+     |          were loaded into DeepTCR3.
      |      
      |      Returns
      |      
@@ -6092,6 +6092,6 @@ CLASSES
      |      list of weak references to the object (if defined)
 
 FILE
-    /home/jsidhom1/DeepTCR_master_v2/DeepTCR/DeepTCR.py
+    /home/jsidhom1/DeepTCR3_master_v2/DeepTCR3/DeepTCR3.py
 
 

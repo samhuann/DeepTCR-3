@@ -4,33 +4,33 @@ Converted 14 files
 Detected 9 issues that require attention
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
-File: ../../../../../../../DeepTCR/DeepTCR.py
+File: ../../../../../../../DeepTCR3/DeepTCR3.py
 --------------------------------------------------------------------------------
-../../../../../../../DeepTCR/DeepTCR.py:2259:26: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+../../../../../../../DeepTCR3/DeepTCR3.py:2259:26: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
 --------------------------------------------------------------------------------
-File: ../../../../../../../DeepTCR/functions/data_processing.py
+File: ../../../../../../../DeepTCR3/functions/data_processing.py
 --------------------------------------------------------------------------------
-../../../../../../../DeepTCR/functions/data_processing.py:181:4: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+../../../../../../../DeepTCR3/functions/data_processing.py:181:4: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
 --------------------------------------------------------------------------------
-File: ../../../../../../../DeepTCR/functions/Layers.py
+File: ../../../../../../../DeepTCR3/functions/Layers.py
 --------------------------------------------------------------------------------
-../../../../../../../DeepTCR/functions/Layers.py:12:33: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
-../../../../../../../DeepTCR/functions/Layers.py:24:33: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
-../../../../../../../DeepTCR/functions/Layers.py:36:33: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
-../../../../../../../DeepTCR/functions/Layers.py:48:34: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
-../../../../../../../DeepTCR/functions/Layers.py:60:34: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
-../../../../../../../DeepTCR/functions/Layers.py:81:29: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
-../../../../../../../DeepTCR/functions/Layers.py:154:37: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+../../../../../../../DeepTCR3/functions/Layers.py:12:33: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+../../../../../../../DeepTCR3/functions/Layers.py:24:33: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+../../../../../../../DeepTCR3/functions/Layers.py:36:33: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+../../../../../../../DeepTCR3/functions/Layers.py:48:34: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+../../../../../../../DeepTCR3/functions/Layers.py:60:34: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+../../../../../../../DeepTCR3/functions/Layers.py:81:29: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+../../../../../../../DeepTCR3/functions/Layers.py:154:37: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
 ================================================================================
 Detailed log follows:
 
 ================================================================================
 ================================================================================
-Input tree: '../../../../../../../DeepTCR/'
+Input tree: '../../../../../../../DeepTCR3/'
 ================================================================================
 --------------------------------------------------------------------------------
-Processing file '../../../../../../../DeepTCR/DeepTCR.py'
- outputting to '../../../../../../../DeepTCR2/DeepTCR.py'
+Processing file '../../../../../../../DeepTCR3/DeepTCR3.py'
+ outputting to '../../../../../../../DeepTCR32/DeepTCR3.py'
 --------------------------------------------------------------------------------
 
 2251:24: INFO: Renamed 'tf.set_random_seed' to 'tf.compat.v1.set_random_seed'
@@ -128,80 +128,80 @@ Processing file '../../../../../../../DeepTCR/DeepTCR.py'
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-Processing file '../../../../../../../DeepTCR/__init__.py'
- outputting to '../../../../../../../DeepTCR2/__init__.py'
+Processing file '../../../../../../../DeepTCR3/__init__.py'
+ outputting to '../../../../../../../DeepTCR32/__init__.py'
 --------------------------------------------------------------------------------
 
 
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-Processing file '../../../../../../../DeepTCR/phenograph/classify.py'
- outputting to '../../../../../../../DeepTCR2/phenograph/classify.py'
+Processing file '../../../../../../../DeepTCR3/phenograph/classify.py'
+ outputting to '../../../../../../../DeepTCR32/phenograph/classify.py'
 --------------------------------------------------------------------------------
 
 
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-Processing file '../../../../../../../DeepTCR/phenograph/__init__.py'
- outputting to '../../../../../../../DeepTCR2/phenograph/__init__.py'
+Processing file '../../../../../../../DeepTCR3/phenograph/__init__.py'
+ outputting to '../../../../../../../DeepTCR32/phenograph/__init__.py'
 --------------------------------------------------------------------------------
 
 
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-Processing file '../../../../../../../DeepTCR/phenograph/bruteforce_nn.py'
- outputting to '../../../../../../../DeepTCR2/phenograph/bruteforce_nn.py'
+Processing file '../../../../../../../DeepTCR3/phenograph/bruteforce_nn.py'
+ outputting to '../../../../../../../DeepTCR32/phenograph/bruteforce_nn.py'
 --------------------------------------------------------------------------------
 
 
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-Processing file '../../../../../../../DeepTCR/phenograph/core.py'
- outputting to '../../../../../../../DeepTCR2/phenograph/core.py'
+Processing file '../../../../../../../DeepTCR3/phenograph/core.py'
+ outputting to '../../../../../../../DeepTCR32/phenograph/core.py'
 --------------------------------------------------------------------------------
 
 
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-Processing file '../../../../../../../DeepTCR/phenograph/cluster.py'
- outputting to '../../../../../../../DeepTCR2/phenograph/cluster.py'
+Processing file '../../../../../../../DeepTCR3/phenograph/cluster.py'
+ outputting to '../../../../../../../DeepTCR32/phenograph/cluster.py'
 --------------------------------------------------------------------------------
 
 
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-Processing file '../../../../../../../DeepTCR/functions/plot_func.py'
- outputting to '../../../../../../../DeepTCR2/functions/plot_func.py'
+Processing file '../../../../../../../DeepTCR3/functions/plot_func.py'
+ outputting to '../../../../../../../DeepTCR32/functions/plot_func.py'
 --------------------------------------------------------------------------------
 
 
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-Processing file '../../../../../../../DeepTCR/functions/__init__.py'
- outputting to '../../../../../../../DeepTCR2/functions/__init__.py'
+Processing file '../../../../../../../DeepTCR3/functions/__init__.py'
+ outputting to '../../../../../../../DeepTCR32/functions/__init__.py'
 --------------------------------------------------------------------------------
 
 
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-Processing file '../../../../../../../DeepTCR/functions/utils_u.py'
- outputting to '../../../../../../../DeepTCR2/functions/utils_u.py'
+Processing file '../../../../../../../DeepTCR3/functions/utils_u.py'
+ outputting to '../../../../../../../DeepTCR32/functions/utils_u.py'
 --------------------------------------------------------------------------------
 
 
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-Processing file '../../../../../../../DeepTCR/functions/utils_s.py'
- outputting to '../../../../../../../DeepTCR2/functions/utils_s.py'
+Processing file '../../../../../../../DeepTCR3/functions/utils_s.py'
+ outputting to '../../../../../../../DeepTCR32/functions/utils_s.py'
 --------------------------------------------------------------------------------
 
 576:13: INFO: Renamed 'tf.SparseTensorValue' to 'tf.compat.v1.SparseTensorValue'
@@ -216,16 +216,16 @@ Processing file '../../../../../../../DeepTCR/functions/utils_s.py'
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-Processing file '../../../../../../../DeepTCR/functions/data_processing.py'
- outputting to '../../../../../../../DeepTCR2/functions/data_processing.py'
+Processing file '../../../../../../../DeepTCR3/functions/data_processing.py'
+ outputting to '../../../../../../../DeepTCR32/functions/data_processing.py'
 --------------------------------------------------------------------------------
 
 181:4: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-Processing file '../../../../../../../DeepTCR/functions/Layers.py'
- outputting to '../../../../../../../DeepTCR2/functions/Layers.py'
+Processing file '../../../../../../../DeepTCR3/functions/Layers.py'
+ outputting to '../../../../../../../DeepTCR32/functions/Layers.py'
 --------------------------------------------------------------------------------
 
 10:19: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
@@ -306,8 +306,8 @@ Processing file '../../../../../../../DeepTCR/functions/Layers.py'
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-Processing file '../../../../../../../DeepTCR/functions/act_fun.py'
- outputting to '../../../../../../../DeepTCR2/functions/act_fun.py'
+Processing file '../../../../../../../DeepTCR3/functions/act_fun.py'
+ outputting to '../../../../../../../DeepTCR32/functions/act_fun.py'
 --------------------------------------------------------------------------------
 
 

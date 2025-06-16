@@ -3,7 +3,7 @@
 """This script is used to benchmark the performance of the Supervised Sequence Classifier
 with either the alpha chain, beta chain, or both provided to the model."""
 
-from DeepTCR.DeepTCR import DeepTCR_SS
+from DeepTCR3.DeepTCR3 import DeepTCR3_SS
 from multiprocessing import Pool
 import matplotlib.pyplot as plt
 from sklearn.metrics import roc_auc_score, roc_curve
@@ -15,7 +15,7 @@ dir_results = 'alpha_v_beta_results'
 if not os.path.exists(dir_results):
     os.makedirs(dir_results)
 
-DTCR = DeepTCR_SS('alpha_v_beta_SS')
+DTCR = DeepTCR3_SS('alpha_v_beta_SS')
 
 antigens = ['ATP6AP1-KLG_G3W',
  'GNL3L-R4C',
@@ -32,13 +32,13 @@ for a in antigens:
     y_test_list = []
     for o in opt:
         if o == 'alpha':
-            DTCR = DeepTCR_SS('alpha_v_beta_SS')
+            DTCR = DeepTCR3_SS('alpha_v_beta_SS')
             DTCR.Get_Data(directory='../../Data/Zhang/'+a,aa_column_alpha=0,p=p)
         elif o == 'beta':
-            DTCR = DeepTCR_SS('alpha_v_beta_SS')
+            DTCR = DeepTCR3_SS('alpha_v_beta_SS')
             DTCR.Get_Data(directory='../../Data/Zhang/'+a,aa_column_beta=1,p=p)
         elif o == 'alpha_beta':
-            DTCR = DeepTCR_SS('alpha_v_beta_SS')
+            DTCR = DeepTCR3_SS('alpha_v_beta_SS')
             DTCR.Get_Data(directory='../../Data/Zhang/'+a,aa_column_alpha=0,aa_column_beta=1,p=p)
 
         DTCR.Monte_Carlo_CrossVal(folds=folds,weight_by_class=True,graph_seed=graph_seed,seeds=seeds)

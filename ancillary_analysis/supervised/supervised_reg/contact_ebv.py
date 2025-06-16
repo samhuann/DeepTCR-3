@@ -1,13 +1,13 @@
 import numpy as np
 import pandas as pd
-from DeepTCR.DeepTCR import DeepTCR_SS
+from DeepTCR3.DeepTCR3 import DeepTCR3_SS
 import seaborn as sns
 import matplotlib.pyplot as plt
 import matplotlib
 matplotlib.rc('font', family='Arial')
 from sklearn.metrics import roc_auc_score, roc_curve
 
-DTCRS = DeepTCR_SS('reg_ebv',device=2)
+DTCRS = DeepTCR3_SS('reg_ebv',device=2)
 
 alpha = 'CAEDNNARLMF'
 beta = 'CSARDGTGNGYTF'

@@ -4,14 +4,14 @@
 of supervised sequence classifier to correctly predict the antigen-specificity of 
 the 9 murine antigens in the manuscript.."""
 
-from DeepTCR.DeepTCR import DeepTCR_SS
+from DeepTCR3.DeepTCR3 import DeepTCR3_SS
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
 matplotlib.rc('font', family='Arial')
 
 #Run Supervised Sequence Classifier
-DTCRS = DeepTCR_SS('Sequence_C',device=2)
+DTCRS = DeepTCR3_SS('Sequence_C',device=2)
 
 
 DTCRS.Get_Data(directory='../../Data/Murine_Antigens',Load_Prev_Data=False,aggregate_by_aa=True,

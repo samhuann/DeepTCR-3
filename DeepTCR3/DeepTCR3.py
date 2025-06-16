@@ -1,10 +1,10 @@
 import sys
 sys.path.append('../')
-from DeepTCR.functions.Layers import *
-from DeepTCR.functions.utils_u import *
-from DeepTCR.functions.utils_s import *
-from DeepTCR.functions.act_fun import *
-from DeepTCR.functions.plot_func import *
+from DeepTCR3.functions.Layers import *
+from DeepTCR3.functions.utils_u import *
+from DeepTCR3.functions.utils_s import *
+from DeepTCR3.functions.act_fun import *
+from DeepTCR3.functions.plot_func import *
 import seaborn as sns
 import colorsys
 from scipy.cluster.hierarchy import linkage,fcluster,dendrogram, leaves_list
@@ -13,7 +13,7 @@ from scipy.spatial.distance import pdist, squareform
 import umap
 from sklearn.cluster import DBSCAN,KMeans
 import sklearn
-import DeepTCR.phenograph as phenograph
+import DeepTCR3.phenograph as phenograph
 from scipy.spatial import distance
 import glob
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder, MultiLabelBinarizer
@@ -27,43 +27,41 @@ from scipy.stats import spearmanr,gaussian_kde
 from distinctipy import distinctipy
 from tqdm import tqdm
 
-class DeepTCR_base(object):
+import torch
+import os
+from torch.utils.data import Dataset, DataLoader
 
-    def __init__(self,Name,max_length=40,device=0,tf_verbosity=3):
+
+class DeepTCR3_base(object):
+
+    def __init__(self, Name, max_length=40, device=0):
+
         """
         # Initialize Training Object.
         Initializes object and sets initial parameters.
 
-        All DeepTCR algorithms begin with initializing a training object. This object will contain all methods, data, and results during the training process. One can extract learned features, per-sequence predictions, among other outputs from DeepTCR and use those in their own analyses as well.
+        All DeepTCR3 algorithms begin with initializing a training object. This object will contain all methods, data, and results during the training process. One can extract learned features, per-sequence predictions, among other outputs from DeepTCR3 and use those in their own analyses as well.
 
-        This method is included in the three main DeepTCR objects:
+        This method is included in the three main DeepTCR3 objects:
 
-        - DeepTCR_U (unsupervised)
-        - DeepTCR_SS (supervised sequence classifier/regressor)
-        - DeepTCR_WF (supervised repertoire classifier/regressor)
-
+        - DeepTCR3_U (unsupervised)
+        - DeepTCR3_SS (supervised sequence classifier/regressor)
+        - DeepTCR3_WF (supervised repertoire classifier/regressor)
 
         Args:
             Name (str): Name of the object. This name will be used to create folders with results as well as a folder with parameters and specifications for any models built/trained.
 
             max_length (int): maximum length of CDR3 sequence.
 
-            device (int): In the case user is using tensorflow-gpu, one can specify the particular device to build the graphs on. This selects which GPU the user wants to put the graph and train on.
-
-            tf_verbosity (str): determines how much tensorflow log output to display while training.
-            0 = all messages are logged (default behavior)
-            1 = INFO messages are not printed
-            2 = INFO and WARNING messages are not printed
-            3 = INFO, WARNING, and ERROR messages are not printed
-
+            device (int or str): PyTorch device to use ('cpu', 'cuda', or device index).
         """
 
-        #Assign parameters
+        # Assign parameters
         self.Name = Name
         self.max_length = max_length
         self.use_beta = False
         self.use_alpha = False
-        self.device = '/device:GPU:'+str(device)
+        self.device = torch.device(f'cuda:{device}' if torch.cuda.is_available() else 'cpu')
         self.use_v_beta = False
         self.use_d_beta = False
         self.use_j_beta = False
@@ -77,25 +75,22 @@ class DeepTCR_base(object):
         self.ind = None
         self.unknown_str = '__unknown__'
 
-        #Create dataframes for assigning AA to ints
+        # Create dataframes for assigning AA to ints
         aa_idx, aa_mat = make_aa_df()
         aa_idx_inv = {v: k for k, v in aa_idx.items()}
         self.aa_idx = aa_idx
         self.aa_idx_inv = aa_idx_inv
 
-        #Create directory for results of analysis
-        directory = os.path.join(self.Name,'results')
+        # Create directory for results of analysis
+        directory = os.path.join(self.Name, 'results')
         self.directory_results = directory
         if not os.path.exists(directory):
             os.makedirs(directory)
 
-        #Create directory for any temporary files
+        # Create directory for any temporary files
         directory = self.Name
         if not os.path.exists(directory):
             os.makedirs(directory)
-
-        tf.compat.v1.disable_eager_execution()
-        os.environ['TF_CPP_MIN_LOG_LEVEL'] = str(tf_verbosity)
 
     def Get_Data(self,directory,Load_Prev_Data=False,classes=None,type_of_data_cut='Fraction_Response',data_cut=1.0,n_jobs=40,
                     aa_column_alpha = None,aa_column_beta = None, count_column = None,sep='\t',aggregate_by_aa=True,
@@ -103,10 +98,10 @@ class DeepTCR_base(object):
                     v_beta_column=None,j_beta_column=None,d_beta_column=None,
                  p=None,hla=None,use_hla_supertype=False,keep_non_supertype_alleles=False):
         """
-        # Get Data for DeepTCR
+        # Get Data for DeepTCR3
         Parse Data into appropriate inputs for neural network from directories where data is stored.
 
-        This method can be used when your data is stored in directories and you want to load it from directoreis into DeepTCR. This method takes care of all pre-processing of the data including:
+        This method can be used when your data is stored in directories and you want to load it from directoreis into DeepTCR3. This method takes care of all pre-processing of the data including:
 
          - Combining all CDR3 sequences with the same nucleotide sequence (optional).
          - Removing any sequences with non-IUPAC characters.
@@ -114,14 +109,14 @@ class DeepTCR_base(object):
          - Determining how much of the data per file to use (type_of_data_cut)
          - Whether to use HLA/HLA-supertypes during training.
 
-        This method is included in the three main DeepTCR objects:
+        This method is included in the three main DeepTCR3 objects:
 
-        - DeepTCR_U (unsupervised)
-        - DeepTCR_SS (supervised sequence classifier/regressor)
-        - DeepTCR_WF (supervised repertoire classifier/regressor)
+        - DeepTCR3_U (unsupervised)
+        - DeepTCR3_SS (supervised sequence classifier/regressor)
+        - DeepTCR3_WF (supervised repertoire classifier/regressor)
 
         Args:
-            directory (str): Path to directory with folders with tsv/csv files are present for analysis. Folders names become           labels for files within them. If the directory contains the TCRSeq files not organized into classes/labels,             DeepTCR will load all files within that directory.
+            directory (str): Path to directory with folders with tsv/csv files are present for analysis. Folders names become           labels for files within them. If the directory contains the TCRSeq files not organized into classes/labels,             DeepTCR3 will load all files within that directory.
 
             Load_Prev_Data (bool): Loads Previous Data. This allows the user to run the method once, and then set this parameter to True to reload the data from a local pickle file.
 
@@ -526,22 +521,22 @@ class DeepTCR_base(object):
                   v_alpha=None,j_alpha=None,class_labels=None,sample_labels=None,freq=None,counts=None,Y=None,
                   p=None,hla=None,use_hla_supertype=False,keep_non_supertype_alleles=False,w=None):
         """
-        # Load Data programatically into DeepTCR.
+        # Load Data programatically into DeepTCR3.
 
-        DeepTCR allows direct user input of sequence data for DeepTCR analysis. By using this method,
+        DeepTCR3 allows direct user input of sequence data for DeepTCR3 analysis. By using this method,
         a user can load numpy arrays with relevant TCRSeq data for analysis.
 
-        Tip: One can load data with the Get_Data command from directories and then reload it into another DeepTCR object with the Load_Data command. This can be useful, for example, if you have different labels you want to train to, and you need to change the label programatically between training each model. In this case, one can load the data first with the Get_Data method and then assign the labels pythonically before feeding them into the DeepTCR object with the Load_Data method.
+        Tip: One can load data with the Get_Data command from directories and then reload it into another DeepTCR3 object with the Load_Data command. This can be useful, for example, if you have different labels you want to train to, and you need to change the label programatically between training each model. In this case, one can load the data first with the Get_Data method and then assign the labels pythonically before feeding them into the DeepTCR3 object with the Load_Data method.
 
-        Of note, this method DOES NOT combine sequences with the same amino acid sequence. Therefore, if one wants this, one should first do it programatically before feeding the data into DeepTCR with this method.
+        Of note, this method DOES NOT combine sequences with the same amino acid sequence. Therefore, if one wants this, one should first do it programatically before feeding the data into DeepTCR3 with this method.
 
-        Another special use case of this method would be for any type of regression task (sequence or repertoire models). In the case that a per-sequence value is fed into DeepTCR (with Y), this value either becomes the per-sequence regression value or the average of all Y over a sample becomes the per-sample regression value. This is another case where one might want to load data with the Get_Data method and then reload it into DeepTCR with regression values.
+        Another special use case of this method would be for any type of regression task (sequence or repertoire models). In the case that a per-sequence value is fed into DeepTCR3 (with Y), this value either becomes the per-sequence regression value or the average of all Y over a sample becomes the per-sample regression value. This is another case where one might want to load data with the Get_Data method and then reload it into DeepTCR3 with regression values.
 
-        This method is included in the three main DeepTCR objects:
+        This method is included in the three main DeepTCR3 objects:
 
-        - DeepTCR_U (unsupervised)
-        - DeepTCR_SS (supervised sequence classifier/regressor)
-        - DeepTCR_WF (supervised repertoire classifier/regressor)
+        - DeepTCR3_U (unsupervised)
+        - DeepTCR3_SS (supervised sequence classifier/regressor)
+        - DeepTCR3_WF (supervised repertoire classifier/regressor)
 
         Args:
 
@@ -569,7 +564,7 @@ class DeepTCR_base(object):
 
             Y (ndarray of float values): In the case one wants to regress TCR sequences or repertoires against a numerical label, one can provide these numerical values for this input. For the TCR sequence regressor, each sequence will be regressed to the value denoted for each sequence. For the TCR repertoire regressor, the average of all instance level values will be used to regress the sample. Therefore, if there is one sample level value for regression, one would just repeat that same value for all the instances/sequences of the sample.
 
-            hla (ndarray of tuples/arrays): To input the hla context for each sequence fed into DeepTCR, this will need to formatted as an ndarray that is (N,) for each sequence where each entry is a tuple or array of strings referring to the alleles seen for that sequence. ('A*01:01', 'A*11:01', 'B*35:01', 'B*35:02', 'C*04:01')
+            hla (ndarray of tuples/arrays): To input the hla context for each sequence fed into DeepTCR3, this will need to formatted as an ndarray that is (N,) for each sequence where each entry is a tuple or array of strings referring to the alleles seen for that sequence. ('A*01:01', 'A*11:01', 'B*35:01', 'B*35:02', 'C*04:01')
 
             use_hla_supertype (bool): Given the diversity of the HLA-loci, training with a full allele may cause over-fitting. And while individuals may have different HLA alleles, these different allelees may bind peptide in a functionality similar way. This idea of supertypes of HLA is a method by which assignments of HLA genes can be aggregated to 6 HLA-A and 6 HLA-B supertypes. In roder to convert input of HLA-allele genes to supertypes, a more biologically functional representation, one can se this parameter to True and if the alleles provided are of one of 945 alleles found in the reference below, it will be assigned to a known supertype.
 
@@ -603,7 +598,7 @@ class DeepTCR_base(object):
 
         for i in inputs:
             if i is not None:
-                assert isinstance(i,np.ndarray),'Inputs into DeepTCR must come in as numpy arrays!'
+                assert isinstance(i,np.ndarray),'Inputs into DeepTCR3 must come in as numpy arrays!'
 
         inputs = [alpha_sequences,beta_sequences,v_beta,d_beta,j_beta,v_alpha,j_alpha]
         for i in inputs:
@@ -791,10 +786,10 @@ class DeepTCR_base(object):
 
         In the case that multiple models have been trained via MC or K-fold Cross-Validation strategy for the sequence classifier, this method can use some or all trained models in an ensemble fashion to provide the average prediction per sequence as well as the distribution of predictions from all trained models.
 
-        This method is included in the two sequence DeepTCR objects:
+        This method is included in the two sequence DeepTCR3 objects:
 
-        - DeepTCR_U (unsupervised)
-        - DeepTCR_SS (supervised sequence classifier/regressor)
+        - DeepTCR3_U (unsupervised)
+        - DeepTCR3_SS (supervised sequence classifier/regressor)
 
         Args:
 
@@ -812,7 +807,7 @@ class DeepTCR_base(object):
 
             j_alpha (ndarray of strings): A 1d array with the j-alpha genes for inference.
 
-            hla (ndarray of tuples/arrays): To input the hla context for each sequence fed into DeepTCR, this will need to formatted as an ndarray that is (N,) for each sequence where each entry is a tuple/array of strings referring to the alleles seen for that sequence. ('A*01:01', 'A*11:01', 'B*35:01', 'B*35:02', 'C*04:01')
+            hla (ndarray of tuples/arrays): To input the hla context for each sequence fed into DeepTCR3, this will need to formatted as an ndarray that is (N,) for each sequence where each entry is a tuple/array of strings referring to the alleles seen for that sequence. ('A*01:01', 'A*11:01', 'B*35:01', 'B*35:02', 'C*04:01')
 
                 - If the model used for inference was trained to use HLA-supertypes, one should still enter the HLA in the format it was provided to the original model (i.e. A0101). This mehthod will then convert those HLA alleles into the appropriaet supertype designation. The HLA alleles DO NOT need to be provided to this method in the supertype designation.
 
@@ -951,7 +946,7 @@ class feature_analytics_class(object):
 
             n_jobs (int): Number of processes to use for parallel operations.
 
-            order_by_linkage (bool): To list sequences in the cluster dataframes by how they are related via ward's linakge, set this value to True. Otherwise, each cluster dataframe will list the sequences by the order they were loaded into DeepTCR.
+            order_by_linkage (bool): To list sequences in the cluster dataframes by how they are related via ward's linakge, set this value to True. Otherwise, each cluster dataframe will list the sequences by the order they were loaded into DeepTCR3.
 
         Returns:
             Cluster Results
@@ -1875,7 +1870,7 @@ class vis_class(object):
         plt.ylabel('')
         plt.savefig(os.path.join(self.directory_results, filename))
 
-class DeepTCR_U(DeepTCR_base,feature_analytics_class,vis_class):
+class DeepTCR3_U(DeepTCR3_base,feature_analytics_class,vis_class):
 
     def _reset_models(self):
         self.models_dir = os.path.join(self.Name,'models')
@@ -1891,7 +1886,7 @@ class DeepTCR_U(DeepTCR_base,feature_analytics_class,vis_class):
         """
         # Train Variational Autoencoder (VAE)
 
-        This method trains the network and saves features values for sequences for a variety of downstream analyses that can either be done within the DeepTCR framework or by the user by simplying extracting out the learned representations.
+        This method trains the network and saves features values for sequences for a variety of downstream analyses that can either be done within the DeepTCR3 framework or by the user by simplying extracting out the learned representations.
 
         Args:
 
@@ -2532,7 +2527,7 @@ class DeepTCR_U(DeepTCR_base,feature_analytics_class,vis_class):
             else:
                 sns.catplot(data=df_out, x='Metric', y='Value', kind=plot_type)
 
-class DeepTCR_S_base(DeepTCR_base,feature_analytics_class,vis_class):
+class DeepTCR3_S_base(DeepTCR3_base,feature_analytics_class,vis_class):
     def AUC_Curve(self,by=None,filename='AUC.tif',title=None,title_font=None,plot=True,diag_line=True,
                   xtick_size = None, ytick_size=None, xlabel_size = None, ylabel_size=None,
                   legend_font_size=None,frameon=True,legend_loc = 'lower right',
@@ -3007,7 +3002,7 @@ class DeepTCR_S_base(DeepTCR_base,feature_analytics_class,vis_class):
 
             j_alpha (ndarray of strings): A 1d array with the j-alpha genes for inference.
 
-            hla (ndarray of tuples/arrays): To input the hla context for each sequence fed into DeepTCR, this will need to formatted as an ndarray that is (N,) for each sequence where each entry is a tuple/array of strings referring to the alleles seen for that sequence. ('A*01:01', 'A*11:01', 'B*35:01', 'B*35:02', 'C*04:01')
+            hla (ndarray of tuples/arrays): To input the hla context for each sequence fed into DeepTCR3, this will need to formatted as an ndarray that is (N,) for each sequence where each entry is a tuple/array of strings referring to the alleles seen for that sequence. ('A*01:01', 'A*11:01', 'B*35:01', 'B*35:02', 'C*04:01')
 
             p (multiprocessing pool object): a pre-formed pool object can be passed to method for multiprocessing tasks.
 
@@ -3060,7 +3055,7 @@ class DeepTCR_S_base(DeepTCR_base,feature_analytics_class,vis_class):
 
             for i in inputs:
                 if i is not None:
-                    assert isinstance(i,np.ndarray),'Inputs into DeepTCR must come in as numpy arrays!'
+                    assert isinstance(i,np.ndarray),'Inputs into DeepTCR3 must come in as numpy arrays!'
 
             inputs = [alpha_sequences,beta_sequences,v_beta,d_beta,j_beta,v_alpha,j_alpha,hla]
             for i in inputs:
@@ -3237,7 +3232,7 @@ class DeepTCR_S_base(DeepTCR_base,feature_analytics_class,vis_class):
 
         return fig,ax
 
-class DeepTCR_SS(DeepTCR_S_base):
+class DeepTCR3_SS(DeepTCR3_S_base):
     def Get_Train_Valid_Test(self,test_size=0.25,LOO=None,split_by_sample=False,combine_train_valid=False):
         """
         # Train/Valid/Test Splits.
@@ -3975,7 +3970,7 @@ class DeepTCR_SS(DeepTCR_S_base):
         print('K-fold Cross Validation Completed')
 
 
-class DeepTCR_WF(DeepTCR_S_base):
+class DeepTCR3_WF(DeepTCR3_S_base):
     def Get_Train_Valid_Test(self,test_size=0.25,LOO=None,combine_train_valid=False,random_perm=False):
         """
         # Train/Valid/Test Splits.
@@ -4979,7 +4974,7 @@ class DeepTCR_WF(DeepTCR_S_base):
 
             freq (ndarray of float values): A 1d array with the frequencies for each sequence.
 
-            hla (ndarray of tuples/arrays): To input the hla context for each sequence fed into DeepTCR, this will need to formatted as an ndarray that is (N,) for each sequence where each entry is a tuple or array of strings referring to the alleles seen for that sequence. ('A*01:01', 'A*11:01', 'B*35:01', 'B*35:02', 'C*04:01')
+            hla (ndarray of tuples/arrays): To input the hla context for each sequence fed into DeepTCR3, this will need to formatted as an ndarray that is (N,) for each sequence where each entry is a tuple or array of strings referring to the alleles seen for that sequence. ('A*01:01', 'A*11:01', 'B*35:01', 'B*35:02', 'C*04:01')
 
                 - If the model used for inference was trained to use HLA-supertypes, one should still enter the HLA in the format it was provided to the original model (i.e. A0101). This mehthod will then convert those HLA alleles into the appropriaet supertype designation. The HLA alleles DO NOT need to be provided to this method in the supertype designation.
 
@@ -5018,7 +5013,7 @@ class DeepTCR_WF(DeepTCR_S_base):
 
         for i in inputs:
             if i is not None:
-                assert isinstance(i,np.ndarray),'Inputs into DeepTCR must come in as numpy arrays!'
+                assert isinstance(i,np.ndarray),'Inputs into DeepTCR3 must come in as numpy arrays!'
 
         inputs = [alpha_sequences,beta_sequences,v_beta,d_beta,j_beta,v_alpha,j_alpha,hla]
         for i in inputs:

@@ -3,7 +3,7 @@
 """This script it sued to direclty compare the performance for sequence classification
 from the unsupervised VAE + KNN vs a supervised deep learning sequence classifier."""
 
-from DeepTCR.DeepTCR import DeepTCR_SS, DeepTCR_U
+from DeepTCR3.DeepTCR3 import DeepTCR3_SS, DeepTCR3_U
 import pandas as pd
 import seaborn as sns
 import numpy as np
@@ -18,7 +18,7 @@ from scipy.stats import ttest_ind
 
 
 #Run VAE
-DTCRU = DeepTCR_U('Sequence_C',device=1)
+DTCRU = DeepTCR3_U('Sequence_C',device=1)
 DTCRU.Get_Data(directory='../../Data/Murine_Antigens',Load_Prev_Data=False,aggregate_by_aa=True,
                aa_column_beta=0,count_column=1,v_beta_column=2,j_beta_column=3)
 graph_seed = 0
@@ -42,7 +42,7 @@ df_u['Method'] = df_metrics['Algorithm']
 df_u['Type'] = 'Unsupervised'
 
 #Run Supervised Sequence Classifier
-DTCRS = DeepTCR_SS('Sequence_C',device=1)
+DTCRS = DeepTCR3_SS('Sequence_C',device=1)
 DTCRS.Get_Data(directory='../../Data/Murine_Antigens',Load_Prev_Data=True,aggregate_by_aa=True,
                aa_column_beta=0,count_column=1,v_beta_column=2,j_beta_column=3)
 

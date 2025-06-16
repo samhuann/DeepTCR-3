@@ -5,7 +5,7 @@ methods to describe the structural diversity of in-silico samples where various
 number of antigen-specific sequences are mixed and then the diversity is measured by
 number of clusters and the entropy across those clusters. Fig.2"""
 
-from DeepTCR.DeepTCR import DeepTCR_U
+from DeepTCR3.DeepTCR3 import DeepTCR3_U
 import numpy as np
 import pandas as pd
 import seaborn as sns
@@ -16,7 +16,7 @@ import pickle
 import matplotlib.pyplot as plt
 
 # Instantiate training object
-DTCRU = DeepTCR_U('Structural_Diversity_U',device='/gpu:1')
+DTCRU = DeepTCR3_U('Structural_Diversity_U',device='/gpu:1')
 
 # Assess ability for structural entropy to be of measure of number of antigens
 classes_all = np.array(['Db-F2', 'Kb-M38', 'Db-M45', 'Db-NP', 'Db-PA', 'Db-PB1', 'Kb-m139','Kb-SIY','Kb-TRP2'])

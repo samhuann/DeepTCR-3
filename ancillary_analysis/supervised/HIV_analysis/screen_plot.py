@@ -1,4 +1,4 @@
-from DeepTCR.DeepTCR import DeepTCR_WF
+from DeepTCR3.DeepTCR3 import DeepTCR3_WF
 import glob
 import os
 import numpy as np
@@ -19,7 +19,7 @@ for file in files:
 
 label_dict = dict(zip(samples,labels))
 
-DTCR = DeepTCR_WF('load')
+DTCR = DeepTCR3_WF('load')
 DTCR.Get_Data('../../../Data/HIV',aa_column_beta=1,count_column=2,v_beta_column=7,d_beta_column=14,j_beta_column=21,
               type_of_data_cut='Read_Cut',data_cut=10)
 

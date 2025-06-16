@@ -2,10 +2,10 @@
 
 """This script is used to create the Repertoire Dendrogram of the Rudqvist_2017 dataset."""
 
-from DeepTCR.DeepTCR import DeepTCR_U
+from DeepTCR3.DeepTCR3 import DeepTCR3_U
 
 # Instantiate training object
-DTCRU = DeepTCR_U('Rep_Dendrogram',device='/device:GPU:1')
+DTCRU = DeepTCR3_U('Rep_Dendrogram',device='/device:GPU:1')
 
 #Load Data from directories
 DTCRU.Get_Data(directory='../../Data/Rudqvist',Load_Prev_Data=True,aggregate_by_aa=True,

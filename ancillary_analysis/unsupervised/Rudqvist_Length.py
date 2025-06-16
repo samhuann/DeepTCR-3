@@ -1,11 +1,11 @@
 import numpy as np
 import pandas as pd
-from DeepTCR.DeepTCR import DeepTCR_U
+from DeepTCR3.DeepTCR3 import DeepTCR3_U
 import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Instantiate training object
-DTCRU = DeepTCR_U('Repertoire_Classification')
+DTCRU = DeepTCR3_U('Repertoire_Classification')
 
 DTCRU.Get_Data(directory='../../Data/Rudqvist',Load_Prev_Data=False,aggregate_by_aa=True,
                aa_column_beta=1,count_column=2,v_beta_column=7,d_beta_column=14,j_beta_column=21)

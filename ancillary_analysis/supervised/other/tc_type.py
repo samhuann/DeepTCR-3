@@ -2,7 +2,7 @@
 Supplementary Figure 19
 """
 
-"""This script is used to generate the plots that look at performance metrics of the DeepTCR models
+"""This script is used to generate the plots that look at performance metrics of the DeepTCR3 models
  stratified by treatment arm in the CheckMate-038 trial data."""
 
 import numpy as np

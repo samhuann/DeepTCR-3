@@ -10,7 +10,7 @@ import pickle
 import numpy as np
 import pandas as pd
 import umap
-from DeepTCR.DeepTCR import DeepTCR_WF,DeepTCR_U
+from DeepTCR3.DeepTCR3 import DeepTCR3_WF,DeepTCR3_U
 import matplotlib.pyplot as plt
 import os
 import seaborn as sns
@@ -29,7 +29,7 @@ import pickle
 os.environ["CUDA DEVICE ORDER"] = 'PCI_BUS_ID'
 os.environ["CUDA_VISIBLE_DEVICES"] = "6"
 
-DTCR = DeepTCR_WF('Human_TIL',device='/device:GPU:0')
+DTCR = DeepTCR3_WF('Human_TIL',device='/device:GPU:0')
 DTCR.Get_Data(directory='../../Data/CheckMate_038',Load_Prev_Data=False,
                aa_column_beta=1,count_column=2,v_beta_column=7,d_beta_column=14,j_beta_column=21,data_cut=1.0,
               hla='../../Data/CheckMate_038/HLA_Ref_sup_AB.csv')
@@ -74,7 +74,7 @@ sample_id = DTCR.sample_id
 file = 'cm038_x2_u.pkl'
 featurize = False
 if featurize:
-    DTCR_U = DeepTCR_U('test_hum', device='/device:GPU:6')
+    DTCR_U = DeepTCR3_U('test_hum', device='/device:GPU:6')
     DTCR_U.Load_Data(beta_sequences=beta_sequences, v_beta=v_beta, d_beta=d_beta, j_beta=j_beta, hla=hla)
     DTCR_U.Train_VAE(Load_Prev_Data=False, latent_dim=64,stop_criterion=0.01)
     X_2 = umap.UMAP().fit_transform(DTCR_U.features)
@@ -137,7 +137,7 @@ d['sample'] = d['sample'].str.replace('_TCRB.tsv', '')
 d['counts'] = d.groupby('sample')['freq'].transform(lambda x: x / x.min())
 
 s = pd.read_csv('CM038_BM.csv')
-s.rename(columns={'DeepTCR': 'preds'}, inplace=True)
+s.rename(columns={'DeepTCR3': 'preds'}, inplace=True)
 s = s.sort_values('preds')
 c_dict = dict(crpr='blue', sdpd='red')
 color_labels = [c_dict[_] for _ in s['Response_cat'].values]

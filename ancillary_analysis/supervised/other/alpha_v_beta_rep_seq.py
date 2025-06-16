@@ -1,4 +1,4 @@
-from DeepTCR.DeepTCR import DeepTCR_SS
+from DeepTCR3.DeepTCR3 import DeepTCR3_SS
 from multiprocessing import Pool
 import matplotlib.pyplot as plt
 from sklearn.metrics import roc_auc_score, roc_curve
@@ -17,7 +17,7 @@ antigens = ['GANAB-S5F',
  'YFV-LLW']
 
 for a in antigens:
-    DTCR = DeepTCR_SS(a+'Rep')
+    DTCR = DeepTCR3_SS(a+'Rep')
     DTCR.Get_Data(directory='../../Data/Zhang/'+a,aa_column_alpha=0,aa_column_beta=1,p=p)
     DTCR.Monte_Carlo_CrossVal(folds=50,weight_by_class=True)
     DTCR.Representative_Sequences()
