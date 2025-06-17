@@ -1,4 +1,4 @@
-# DeepTCR 3
+# DeepTCR Torch (archived)
 
 ## Deep Learning Methods for Parsing T-Cell Receptor Sequencing (TCRSeq) Data
 
